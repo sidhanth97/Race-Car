@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+
+<xacro:macro name="default_inertial" params="mass">
+  <inertial>
+    <mass value="${mass}" />
+    <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+  </inertial>
+</xacro:macro>
+
+<xacro:macro name="wheel_link" params="name" "rpy" "xyz" "wheel_radius" "wheel_width" "joint_name" "joint_rpy" "joint_xyz"> 
+  <link name="${name}">
+    <visual>
+      <origin rpy="${rpy}" xyz="${xyz}"/>
+        <geometry>
+          <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+  </link>
+
+  <joint name="${joint_name}" type="revolute">
+    <parent link="chassis_link"/>
+    <child link="${name}"/>
+    <origin rpy="{joint_rpy}" xyz="${joint_xyz}"/>
+  </joint>
+<xacro:macro>
+
+
+
+<!-- Some time-pass -->
+
+<xacro:include filename="$(find simulation_env_pkg)/models/materials.xacro" />
+<xacro:include filename="$(find simulation_env_pkg)/models/macro.xacro" />
+<xacro:include filename="$(find simulation_env_pkg)/models/parameter.xacro" />
+
+
+<link name="base_link">
+    <pose>0 0 0 0 0 0</pose> 
+  </link>
+
+  <joint name="base_link_to_chassis" type="fixed">
+    <parent link="base_link"/>
+    <child link="chassis_link"/>
+  </joint>
+
+  <link name="chassis_link">
+    <inertial>
+    </inertial>
+    
+    <collision>
+    </collision>
+
+    <visual>
+      <origin rpy="0 0 " xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.1" radius="0.035"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <link name="left_front_wheel">
+    <visual>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.1" radius="0.035"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+    
+  <joint name="left_front_wheel_joint" type="fixed">
+    <parent link="chassis_link"/>
+    <child link="left_front_wheel"/>
+    <origin rpy="0 0 0" xyz="0.133333333333 0 -0.085"/>
+  </joint>
+
+  <link name="left_back_wheel">
+    <visual>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.1" radius="0.035"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <joint name="left_back_wheel_joint" type="fixed">
+    <parent link="chassis_link"/>
+    <child link="left_back_wheel"/>
+    <origin rpy="0 0 0" xyz="-0.133333333333 0 -0.085"/>
+  </joint>
+
+  <link name="right_front_wheel">
+    <visual>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.1" radius="0.035"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <joint name="right_front_wheel_joint" type="fixed">
+    <parent link="chassis_link"/>
+    <child link="right_front_wheel"/>
+    <origin rpy="0 0 0" xyz="0.133333333333 0 -0.085"/>
+  </joint>
+   
+  <link name="right_back_wheel">
+    <visual>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.1" radius="0.035"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <joint name="right_back_wheel_joint" type="fixed">
+    <parent link="chassis_link"/>
+    <child link="right_back_wheel"/>
+    <origin rpy="0 0 0" xyz="-0.133333333333 0 -0.085"/>
+  </joint>
