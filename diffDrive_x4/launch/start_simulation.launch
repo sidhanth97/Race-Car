@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <include file="$(find simulation_env_pkg)/launch/4WDiffDrive.launch"/>
+</launch>

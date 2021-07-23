@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- This version uses the openai_ros environments -->
+    <rosparam command="load" file="$(find diffDrive_x4)/config/4WDD_sac.yaml" />
+    <!-- Launch the training system -->
+    <node pkg="diffDrive_x4" name="SAC_learning" type="start_sac_main.py" output="screen"/>
+</launch>
